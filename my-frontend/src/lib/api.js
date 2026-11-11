@@ -62,6 +62,7 @@ function sheetPayload(payload) {
     email: payload.email,
     address: payload.address,
     age: payload.age,
+    gender: payload.gender,
     organization: payload.organization,
     school: payload.organization,
     speakerAnswers: answers,

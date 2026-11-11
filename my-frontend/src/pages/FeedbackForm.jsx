@@ -16,6 +16,7 @@ const emptyForm = {
   email: '',
   address: '',
   age: '',
+  gender: '',
   organization: '',
   speakerAnswers: emptySpeakerAnswers(),
   venueRating: 0,
@@ -65,6 +66,9 @@ export default function FeedbackForm({ onIssued }) {
     const age = Number(form.age)
     if (!Number.isInteger(age) || age < 1 || age > 120) {
       return 'Please enter a valid age.'
+    }
+    if (form.gender !== 'Male' && form.gender !== 'Female') {
+      return 'Please select Male or Female.'
     }
     if (!form.organization.trim()) {
       return 'School or organization is required.'
@@ -129,6 +133,7 @@ export default function FeedbackForm({ onIssued }) {
       email: certificate.email,
       address: form.address.trim(),
       age: Number(form.age),
+      gender: form.gender,
       organization: form.organization.trim(),
       speakerAnswers: form.speakerAnswers,
       venueRating: form.venueRating,
@@ -145,31 +150,37 @@ export default function FeedbackForm({ onIssued }) {
 
   return (
     <main className="page">
-      <header className="hero-banner">
-        <img src={EVENT.banner.src} alt={EVENT.banner.alt} />
-      </header>
-
-      <section className="intro">
-        <p className="eyebrow">Mind check, kamusta ka?</p>
-        <h1>A quiet space for your summit feedback</h1>
+      <header className="masthead">
+        <div className="masthead-meta">
+          <span>Bagong Cabuyao</span>
+          <span>{EVENT.edition}</span>
+          <span>CYSDO</span>
+        </div>
+        <div className="masthead-rule" />
+        <p className="eyebrow"></p>
+        <h1>
+          Campus Journalism Summit
+          <em> Year 2</em>
+        </h1>
         <p className="lede">
-          Share how the day felt, then receive your certificate of attendance. Take your time —
-          every response helps the next gathering.
+          The second edition of the campus journalism summit year 2 gathering. Send your dispatch on the
+          speakers, venue, and the program, then collect your certificate of participation.
         </p>
-      </section>
+        <div className="masthead-rule thick" />
+      </header>
 
       <form className="card form" onSubmit={step === 1 ? handleNext : handleSubmit}>
         <ol className="form-steps" aria-label="Form progress">
-          <li className={step === 1 ? 'current' : 'done'}>Your details</li>
-          <li className={step === 2 ? 'current' : ''}>Feedback</li>
+          <li className={step === 1 ? 'current' : 'done'}>Personal Information</li>
+          <li className={step === 2 ? 'current' : ''}>Feedback Questions</li>
         </ol>
 
         {step === 1 ? (
           <section>
-            <h2>Participant</h2>
+            <h2>Personal information</h2>
             <p className="section-copy">
-              All personal details are required: full name, email, address, age, and school or
-              organization. Speaker and event questions are on the next page.
+              Every field on this page is required. Speaker and program questions
+              are on the next page.
             </p>
             <div className="field-grid">
               <label>
@@ -219,6 +230,24 @@ export default function FeedbackForm({ onIssued }) {
                   placeholder="e.g. 18"
                 />
               </label>
+              <fieldset className="gender-field">
+                <legend>Gender</legend>
+                <div className="gender-options">
+                  {['Male', 'Female'].map((option) => (
+                    <label key={option} className={form.gender === option ? 'picked' : ''}>
+                      <input
+                        type="radio"
+                        name="gender"
+                        value={option}
+                        checked={form.gender === option}
+                        onChange={() => update('gender', option)}
+                        required
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
               <label>
                 School / organization
                 <input
@@ -237,8 +266,8 @@ export default function FeedbackForm({ onIssued }) {
             <section>
               <h2>Speakers</h2>
               <p className="section-copy">
-                Four guest speakers presented at this summit. Rate the speakers as a group, not
-                one by one.
+                Four guest speakers took the Campus Journalism Year 2 desk. Rate them as a group,
+                not one by one.
               </p>
               <ul className="speaker-roster">
                 {SPEAKERS.map((speaker, index) => (
@@ -275,7 +304,7 @@ export default function FeedbackForm({ onIssued }) {
             <section>
               <h2>Whole event</h2>
               <p className="section-copy">
-                Share feedback on the venue and the summit as a whole.
+                Share feedback on the venue and the Year 2 program as a whole.
               </p>
               <h3 className="subhead">{EVENT.venueName}</h3>
               <p className="section-copy">Accessibility, comfort, facilities, and overall setting.</p>
@@ -296,7 +325,7 @@ export default function FeedbackForm({ onIssued }) {
                 />
               </label>
 
-              <h3 className="subhead">Entire summit</h3>
+              <h3 className="subhead">Entire Year 2 program</h3>
               <p className="section-copy">
                 Program, organization, and whether this event should continue or change.
               </p>
@@ -352,7 +381,7 @@ export default function FeedbackForm({ onIssued }) {
 
       <footer className="site-footer">
         <img className="partner-logo" src={EVENT.partnerLogo.src} alt={EVENT.partnerLogo.alt} />
-        <p>Bagong Cabuyao Mental Health and Wellness Summit</p>
+        <p>Campus Journalism Summit Year 2 · Bagong Cabuyao</p>
       </footer>
     </main>
   )

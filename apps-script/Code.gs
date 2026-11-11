@@ -1,6 +1,6 @@
-// Mental Health Summit feedback → Google Sheet
+// Campus Journalism Year 2 feedback → Google Sheet
 // Spreadsheet: https://docs.google.com/spreadsheets/d/1nvBpnwLSeE9NtCkALwqPM1pbzL2WgEGik17pCtuFFCY/edit
-// After changing this file: open THIS spreadsheet (Mental Health Feedback) >
+// After changing this file: open THIS spreadsheet (Campus Journalism Year 2 Feedback) >
 // Extensions > Apps Script, paste this Code.gs, then Deploy > Manage deployments
 // > Edit (pencil) > Version: New version > Deploy. Execute as Me, Who has access: Anyone.
 // Put that /exec URL in my-frontend/.env as VITE_APPS_SCRIPT_URL. A script bound to
@@ -66,6 +66,8 @@ const HEADER_ALIASES = {
   Organization: 'School / organization',
   'School/Organization': 'School / organization',
   'School or organization': 'School / organization',
+  Sex: 'Gender',
+  gender: 'Gender',
   VenueRating: 'Venue | Rating',
   VenueComment: 'Venue | Comments',
   SpeakersOverall: speakerSheetHeader_('overall'),
@@ -171,6 +173,7 @@ const HEADERS = [
     'Entire summit | Comments',
     'IdempotencyKey',
     'VerifyUrl',
+    'Gender',
   ])
 
 const EMAIL_INDEX = HEADERS.indexOf('Email')
@@ -212,7 +215,7 @@ function doGet(e) {
   }
   return json_({
     ok: true,
-    service: 'Mental Health Summit feedback',
+    service: 'Campus Journalism Year 2 feedback',
     spreadsheetId: SPREADSHEET_ID,
   })
 }
@@ -244,6 +247,7 @@ function testInsertSampleRow() {
     email: 'test-insert@example.com',
     address: 'Test street, Cabuyao',
     age: 18,
+    gender: 'Female',
     organization: 'Test School',
     speakerAnswers: {
       knowledge: 5,
@@ -373,6 +377,7 @@ function formatSheet_(sheet) {
     else if (header === 'Email') sheet.setColumnWidth(i + 1, 220)
     else if (header === 'Address') sheet.setColumnWidth(i + 1, 220)
     else if (header === 'Age') sheet.setColumnWidth(i + 1, 70)
+    else if (header === 'Gender') sheet.setColumnWidth(i + 1, 90)
     else if (header === 'School / organization') sheet.setColumnWidth(i + 1, 180)
     else if (header.indexOf('Comments') !== -1) sheet.setColumnWidth(i + 1, 240)
     else if (header === 'VerifyUrl') sheet.setColumnWidth(i + 1, 220)
@@ -746,6 +751,7 @@ function buildSubmissionRecord_(payload, certId, now, verifyUrl) {
   record.Email = String(payload.email).toLowerCase().trim()
   record.Address = String(payload.address).trim()
   record.Age = payload.age
+  record.Gender = payload.gender
   record['School / organization'] = String(payload.organization).trim()
   record['Venue | Rating'] = asRating_(payload.venueRating)
   record['Venue | Comments'] = payload.venueComment || ''
@@ -793,7 +799,7 @@ function columnForHeader_(headers, name) {
 
 function onOpen() {
   SpreadsheetApp.getUi()
-    .createMenu('Mental Health Summit')
+    .createMenu('Campus Journalism Year 2')
     .addItem('Setup submissions sheet', 'setupSummitSheet')
     .addItem('Repair column alignment', 'repairColumnAlignment')
     .addToUi()
@@ -861,10 +867,16 @@ function validateSubmission_(payload) {
   if (!organization) {
     throw new Error('School or organization is required')
   }
+  const genderRaw = String(next.gender || next.Gender || next.sex || next.Sex || '').trim().toLowerCase()
+  const gender = genderRaw === 'male' ? 'Male' : genderRaw === 'female' ? 'Female' : ''
+  if (!gender) {
+    throw new Error('Gender must be Male or Female')
+  }
   next.fullName = fullName
   next.email = email
   next.address = address
   next.age = age
+  next.gender = gender
   next.organization = organization
   next.speakerAnswers = generalSpeakerBlock_(next)
   return next
@@ -889,6 +901,7 @@ function buildRowValues_(payload, certId, stamp, verifyUrl) {
       payload.seminarComments || '',
       payload.idempotencyKey || '',
       verifyUrl || '',
+      payload.gender || '',
     ])
 }
 
@@ -901,7 +914,7 @@ function submitFeedback_(payload) {
   try {
     const ss = getSpreadsheet_()
     if (ss.getId() !== SPREADSHEET_ID) {
-      throw new Error('Script is bound to the wrong spreadsheet. Open the Mental Health Feedback file and deploy this Code.gs from there.')
+      throw new Error('Script is bound to the wrong spreadsheet. Open the Campus Journalism Year 2 Feedback file and deploy this Code.gs from there.')
     }
     const sheet = getSheet_()
     ensureHeaderRow_(sheet)

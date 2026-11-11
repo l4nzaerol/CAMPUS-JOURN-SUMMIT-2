@@ -122,11 +122,11 @@ export default function CertificatePage({
     return (
       <main className="page">
         <div className="card">
-          <p className="eyebrow">Mental Health Summit</p>
+          <p className="eyebrow">Campus Journalism Year 2</p>
           <h1>{lookupStatus === 'loading' ? 'Opening certificate…' : 'Certificate not found'}</h1>
           <p className="lede">
             {lookupStatus === 'loading'
-              ? 'Loading this e-certificate from the summit records.'
+              ? 'Loading this e-certificate from the Year 2 records.'
               : error ||
                 'This link is missing certificate details. Scan the QR code on the e-certificate or submit the feedback form again.'}
           </p>
@@ -143,12 +143,12 @@ export default function CertificatePage({
   return (
     <main className="page certificate-page">
       <header className="hero-card compact">
-        <p className="eyebrow">BAGONG CABUYAO MENTAL HEALTH AND WELLNESS SUMMIT</p>
-        <h1>Certificate of Attendance</h1>
+        <p className="eyebrow">Campus Journalism Year 2</p>
+        <h1>Certificate of Participation</h1>
         <p className="lede">
           {fromForm
             ? 'Download a PNG to keep a copy. Scanning the QR code later opens a download-only certificate page.'
-            : 'This is the official e-certificate for this mental health and wellnes summit. You can download the PNG copy here.'}
+            : 'This is the official e-certificate for Campus Journalism Year 2. You can download the PNG copy here.'}
         </p>
         {saveStatus === 'saving' ? (
           <p className="note">Saving your feedback in the background…</p>
@@ -176,7 +176,7 @@ export default function CertificatePage({
       </div>
       <footer className="site-footer">
         <img className="partner-logo" src={EVENT.partnerLogo.src} alt={EVENT.partnerLogo.alt} />
-        <p>Bagong Cabuyao Mental Health and Wellness Summit</p>
+        <p>Campus Journalism Year 2 · Bagong Cabuyao</p>
       </footer>
     </main>
   )

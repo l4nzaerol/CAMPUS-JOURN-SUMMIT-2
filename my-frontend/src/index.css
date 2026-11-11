@@ -1,20 +1,20 @@
 :root {
-  --ink: #1e3532;
-  --muted: #5c716c;
-  --bg: #eef4f1;
-  --paper: #fffcf8;
-  --line: #d4e2dc;
-  --accent: #3e7a70;
-  --accent-dark: #2c5f57;
-  --accent-soft: #dceee8;
-  --lavender: #7d7396;
-  --sky: #d7ecf4;
-  --danger: #b24a4a;
-  --gold: #c9a227;
-  --sans: "Manrope", "Segoe UI", system-ui, sans-serif;
-  --serif: "Fraunces", Georgia, serif;
-  --radius: 28px;
-  --shadow: 0 18px 48px rgba(30, 53, 50, 0.07);
+  --ink: #1c1012;
+  --muted: #7a4d52;
+  --bg: #fff;
+  --paper: #ffffff;
+  --line: #f0c8cc;
+  --accent: #c1121f;
+  --accent-dark: #8d0d16;
+  --accent-soft: #ffe8ea;
+  --lavender: #a4161a;
+  --sky: #fff1f2;
+  --danger: #9f1239;
+  --gold: #e11d2e;
+  --sans: "Outfit", "Segoe UI", system-ui, sans-serif;
+  --serif: "Newsreader", Georgia, serif;
+  --radius: 6px;
+  --shadow: 0 18px 40px rgba(141, 13, 22, 0.08);
 }
 
 * {
@@ -32,10 +32,17 @@ body {
   font-family: var(--sans);
   color: var(--ink);
   background:
-    radial-gradient(42rem 30rem at 6% -10%, rgba(167, 210, 224, 0.55), transparent 62%),
-    radial-gradient(34rem 24rem at 100% 0%, rgba(196, 186, 224, 0.26), transparent 58%),
-    radial-gradient(28rem 20rem at 86% 108%, rgba(176, 214, 196, 0.42), transparent 52%),
-    var(--bg);
+    linear-gradient(#c1121f, #c1121f) 0 0 / 100% 10px no-repeat,
+    linear-gradient(#fff, #fff) 0 10px / 100% 6px no-repeat,
+    linear-gradient(#1c1012, #1c1012) 0 16px / 100% 2px no-repeat,
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 72px,
+      rgba(193, 18, 31, 0.045) 72px,
+      rgba(193, 18, 31, 0.045) 73px
+    ),
+    #fffafb;
 }
 
 h1,

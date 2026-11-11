@@ -1,13 +1,9 @@
 export const EVENT = {
-  name: 'Mental Health Summit',
-  shortName: 'MHS',
-  tagline: 'Seminar feedback & certificate of participation',
+  name: 'Campus Journalism Year 2',
+  shortName: 'CJY2',
+  tagline: 'Edition two feedback & certificate of participation',
   dateLabel: '2026',
-  venueName: 'Summit venue',
-  banner: {
-    src: '/img/ok%20lang%20yan.jpg',
-    alt: "Ok lang 'yan — Bagong Cabuyao Mental Health and Wellness Summit",
-  },
+  venueName: 'Venue',
   partnerLogo: {
     src: '/img/cysdocombined.png',
     alt: 'Lungsod ng Cabuyao, Bagong Cabuyao, Cabuyao Sports Committee, and Youth Development Affairs Office',
@@ -17,24 +13,15 @@ export const EVENT = {
 export const SPEAKERS = [
   {
     id: 'speaker-1',
-    name: 'Dr. Jannah Trixie Cuevas, RPsy, RPm, CHRA',
-    topic: 'MIND CHECK: Understanding Mental Health and Emotional Wellness',
+    name: 'Alfonso Tomas " ATOM" Araullo',
+    topic: 'News Reporting and Journalism in the Philippines: The Role of the Youth in the Media',
   },
   {
     id: 'speaker-2',
-    name: 'Joseph Bryan Samonte, RPm, MPsy',
-    topic: 'Kaya mo yan - Realizations on suicide, its causes, and its repercussions',
+    name: 'Kara David',
+    topic: 'Investigative Journalism and the Importance of Fact-Checking in the Digital Age',
   },
-  {
-    id: 'speaker-3',
-    name: 'Mr. Kim "Kuya Kim" Atienza',
-    topic: 'Kamusta ka? - Real Talk - Voicing out whats within',
-  },
-  {
-    id: 'speaker-4',
-    name: 'Ms. Ymarie Pascua',
-    topic: 'Facing the battle with yourself - Discussion on dealing with your inner voices',
-  },
+  
 ]
 
 export const SPEAKER_QUESTIONS = [
