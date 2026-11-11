@@ -1,17 +1,17 @@
 // Campus Journalism Year 2 feedback → Google Sheet
-// Spreadsheet: https://docs.google.com/spreadsheets/d/1nvBpnwLSeE9NtCkALwqPM1pbzL2WgEGik17pCtuFFCY/edit
+// Spreadsheet: https://docs.google.com/spreadsheets/d/1qj07HWEW9Mu4KcIaZGUljnzg4qGOnTBy1PH80W-nUiw/edit
 // After changing this file: open THIS spreadsheet (Campus Journalism Year 2 Feedback) >
 // Extensions > Apps Script, paste this Code.gs, then Deploy > Manage deployments
 // > Edit (pencil) > Version: New version > Deploy. Execute as Me, Who has access: Anyone.
 // Put that /exec URL in my-frontend/.env as VITE_APPS_SCRIPT_URL. A script bound to
 // a different spreadsheet will not show rows here.
-const SPREADSHEET_ID = '1nvBpnwLSeE9NtCkALwqPM1pbzL2WgEGik17pCtuFFCY'
+const SPREADSHEET_ID = '1qj07HWEW9Mu4KcIaZGUljnzg4qGOnTBy1PH80W-nUiw'
 const SHEET_NAME = 'Submissions'
 // Live website that shows certificates when a QR code is scanned (no trailing slash).
 // Also stored as script property PUBLIC_SITE_URL. The frontend origin from each
 // submission is used when this is left blank.
-const PUBLIC_SITE_URL = 'https://mental-health-summit.vercel.app'
-const SPEAKER_IDS = ['speaker-1', 'speaker-2', 'speaker-3', 'speaker-4']
+const PUBLIC_SITE_URL = ''
+const SPEAKER_IDS = ['speaker-1', 'speaker-2']
 const SPEAKER_QUESTIONS = [
   { id: 'knowledge', header: 'The guest speakers demonstrated good knowledge of the topic.' },
   { id: 'clarity', header: 'The guest speakers presented the topic clearly and effectively.' },
